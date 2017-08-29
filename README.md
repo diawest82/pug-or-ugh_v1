@@ -85,3 +85,6 @@ The following routes are expected by the JavaScript application.
 
 	* `/api/user/preferences/`
 
+token: b2e4fbf205273e707b20f8b23dcefa1215c509cd
+
+

@@ -19,6 +19,7 @@ SIZE = (
 STATUS = (
     ('l', 'liked'),
     ('d', 'dislike'),
+    ('u', 'undecided')
 )
 
 AGE = (
@@ -26,6 +27,11 @@ AGE = (
     ('y', 'young'),
     ('a', 'adult'),
     ('s', 'senior'),
+)
+
+STERILIZATION = (
+    ('y', 'yes'),
+    ('n', 'no'),
 )
 
 
@@ -36,6 +42,7 @@ class Dog(models.Model):
     age = models.IntegerField(default=1, blank=True)
     gender = models.CharField(choices=GENDERS, default='Unknown', max_length=15)
     size = models.CharField(choices=SIZE, max_length=8, default='Unknown')
+    sterilized = models.CharField(choices=STERILIZATION, max_length=20, default='Unknown')
 
     def __str__(self):
         return self.name
@@ -44,7 +51,7 @@ class Dog(models.Model):
 class UserDog(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     dog = models.ForeignKey(Dog, on_delete=models.CASCADE)
-    status = models.CharField(choices=STATUS, max_length=10, default='Undecided')
+    status = models.CharField(choices=STATUS, max_length=10, default='undecided')
 
     def __str__(self):
         return '{} {} {}'.format(self.user, self.dog, self.get_status_display())
@@ -55,6 +62,7 @@ class UserPref(models.Model):
     age = models.CharField(choices=AGE, max_length=8, default='b,y,a,s')
     gender = models.CharField(max_length=30, choices=GENDERS, default='f, m')
     size = models.CharField(max_length=30, choices=SIZE, default='s, m, l, xl')
+    sterilized = models.CharField(max_length=20, choices=STERILIZATION, default='y, n')
 
     def __str__(self):
         return '{} preferred dog'.format(self.user)

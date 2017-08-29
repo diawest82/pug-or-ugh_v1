@@ -20,6 +20,14 @@ class UserSerializer(serializers.ModelSerializer):
         model = get_user_model()
 
 
+class IsStaffSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            'is_staff',
+        )
+        model = get_user_model()
+
+
 class DogSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
@@ -29,7 +37,8 @@ class DogSerializer(serializers.ModelSerializer):
             'breed',
             'age',
             'gender',
-            'size'
+            'size',
+            'sterilized',
         )
         model = models.Dog
 
@@ -43,7 +52,8 @@ class UserPrefSerializer(serializers.ModelSerializer):
         fields = (
             'age',
             'gender',
-            'size'
+            'size',
+            'sterilized',
         )
         model = models.UserPref
 
@@ -56,7 +66,7 @@ class UserDogSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             'dog',
-            'status'
+            'status',
         )
 
         model = models.UserDog
